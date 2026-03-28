@@ -1,0 +1,12 @@
+header, nav{
+    height: 64px;
+}
+
+.sidenav{
+    top: 64;
+    height: calc(100vh - 64px);
+}
+
+body{
+    color:blue;
+}

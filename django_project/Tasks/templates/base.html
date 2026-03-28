@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-wrapper blue accent-4">
+                <a href="#"  class="brand-logo">Goal track</a>
+            </div>
+        </nav>
+    </header>
+    
+
+    <ul class="sidenav sidenav-fixed">
+        <li><a href="#">Головна</a></li>
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header">Завдання</div>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="#">Денні</a></li>
+                        <li><a href="#">Тижневі</a></li>
+                        <li><a href="#">Місячні</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <li><a href="#">Звички</a></li>
+        <li><a href="#">Статистика</a></li>
+    </ul>
+
+    <main>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+</body>
+</html>
