@@ -9,38 +9,46 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-wrapper blue accent-4">
-                <a href="#"  class="brand-logo">Goal track</a>
-            </div>
-        </nav>
-    </header>
-    
-
-    <ul class="sidenav sidenav-fixed">
-        <li><a href="#">Головна</a></li>
-        <ul class="collapsible">
-            <li>
-                <div class="collapsible-header">Завдання</div>
-                <div class="collapsible-body">
-                    <ul>
-                        <li><a href="#">Денні</a></li>
-                        <li><a href="#">Тижневі</a></li>
-                        <li><a href="#">Місячні</a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-        <li><a href="#">Звички</a></li>
-        <li><a href="#">Статистика</a></li>
-    </ul>
-
-    <main>
-        <div class="container">
-            {% block content %}
-            {% endblock %}
+    <nav class="nav-extended blue accent-4">
+        <div class="nav-wrapper ">
+            <a href="#" class="brand-logo">GoalTrack</a>
         </div>
+    </nav>
+
+    <ul id="side-out" class="sidenav sidenav-fixed">
+        <li><a href="#">Головна</a></li>
+        <li>
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">Завдання</div>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="#">Денні</a></li>
+                            <li><a href="#">Тижневі</a></li>
+                            <li><a href="#">Місячні</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Звички</a></li>
+        <li><a href="#">Статисеика</a></li>
+    </ul>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            M.Collapsible.init(elems);
+        });
+    </script>
+
+    <main style="margin-left: 300px;">
+        {% block content %}
+        {% endblock %}
     </main>
+    <footer class="page-footer">
+        <div class="container">
+
+        </div>
+    </footer>
 </body>
 </html>
