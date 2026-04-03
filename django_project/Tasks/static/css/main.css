@@ -1,12 +1,44 @@
 header, nav{
-    height: 64px;
+    position: fixed;
+    padding-left: 64px;
+    z-index: 1000;
 }
 
-.sidenav{
-    top: 64;
+.sidenav.sidenav-fixed{ 
+    position: fixed;
+    top: 64px;
     height: calc(100vh - 64px);
+    flex-shrink: 0;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 250px;
+}
+
+
+#delete-btn{
+    background-color: red;          
+}
+#done-btn{
+    background-color: green;
+}
+
+#made_task{
+    padding-left: 20px;
+    padding-top: 530px;
+}
+
+main{
+    margin-left: 300px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+    padding: 64px;
 }
 
 body{
-    color:blue;
+    margin: 0;
+    overflow: hidden;
 }
