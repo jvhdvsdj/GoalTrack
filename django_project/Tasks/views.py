@@ -10,4 +10,4 @@ def task_cards(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'task_cards.html', {'page_obj': page_obj})
+    return render(request, 'tasks.html', {'page_obj': page_obj})
