@@ -17,4 +17,41 @@
         <div id="made_task">
             <a class="btn-small">Додати завдання</a>
         </div>
+        <footer id="task_footer" class="page-footer blue accent-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col s5">
+                        <h4>{{ task.title }}</h4>
+                    </div>
+                    <div class="col offset-s4 s3 ">
+                        <h5 id="time-left" data-time="{{ seconds_left }}"></h5>
+                    </div>
+                </div>
+            </div>
+            <script>
+                const timerElement = document.getElementById("time-left");
+                if (timerElement && timerElement.dataset.time) {
+                    let timeLeft = parseInt(document.getElementById("time-left").dataset.time);
+
+                    function updateTimer() {
+                        if (timeLeft <= 0) {
+                        document.getElementById("time-left").innerText = "Час вийшов";
+                        return;
+                        }
+
+                        let hours = Math.floor(timeLeft / 3600);
+                        let minutes = Math.floor((timeLeft % 3600) / 60);
+                        let seconds = timeLeft % 60;
+
+                        document.getElementById("time-left").innerText =
+                        hours + ":" + minutes + ":" + seconds;
+
+                        timeLeft--; 
+                    }
+                
+                    updateTimer();          
+                    setInterval(updateTimer, 1000); 
+                }
+            </script>
+        </footer>
 {% endblock %}
