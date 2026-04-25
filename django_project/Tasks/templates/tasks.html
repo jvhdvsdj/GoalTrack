@@ -30,6 +30,7 @@
             </div>
             <script>
                 const timerElement = document.getElementById("time-left");
+                const format = (num) => num.toString().padStart(2, '0');
                 if (timerElement && timerElement.dataset.time) {
                     let timeLeft = parseInt(document.getElementById("time-left").dataset.time);
 
@@ -39,12 +40,13 @@
                         return;
                         }
 
-                        let hours = Math.floor(timeLeft / 3600);
+                        let days = Math.floor(timeLeft / 86400);
+                        let hours = Math.floor((timeLeft / 86400) / 3600);
                         let minutes = Math.floor((timeLeft % 3600) / 60);
                         let seconds = timeLeft % 60;
 
                         document.getElementById("time-left").innerText =
-                        hours + ":" + minutes + ":" + seconds;
+                        days + "д " + format(hours) + ":" + format(minutes) + ":" + format(seconds);
 
                         timeLeft--; 
                     }
