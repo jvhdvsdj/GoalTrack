@@ -19,7 +19,14 @@ def task_cards(request):
         diff = (task_for_timer.deadline - now).total_seconds()
         seconds_left = int(diff) if diff > 0 else 0
 
-    return render(request, 'task_cards.html', {
+    def add_task(request):
+        if request.method == "POST":
+            title = request.POST.get("title")
+            description = request.POST.get("description")
+            deadline = request.POST.get("deadline")
+            Task.objects.create(title=title,description=description, deadline=deadline)
+
+    return render(request, 'task.html', {
         'page_obj': page_obj, 
         'seconds_left': seconds_left,
         'task': task_for_timer 
