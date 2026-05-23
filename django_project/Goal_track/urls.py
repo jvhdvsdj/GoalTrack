@@ -20,5 +20,7 @@ from Tasks.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('task/', views.tasks)
+    path('tasks', task_cards),
+    path('add/', add_task, name='add_task'),
+    path('habits/', habits_page )
 ]
