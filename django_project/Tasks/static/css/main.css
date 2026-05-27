@@ -20,7 +20,6 @@ header, nav{
 
 
 
-
 #made_task{
     padding-left: 20px;
     margin-top: 30px;
@@ -32,15 +31,16 @@ main{
     margin-top: 64px;
     min-height: calc(100vh - 64px - 100px);
     padding-bottom: 20px;
-}
-
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
+ 
 }
 
 #task_footer{
     padding: 30px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
