@@ -10,47 +10,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>Document</title>
 </head>
-<body>
-    <nav class="nav-extended blue accent-4">
-        <div class="nav-wrapper ">
-            <a href="#" class="brand-logo">GoalTrack</a>
-        </div>
-    </nav>
-
-    <ul id="side-out" class="sidenav sidenav-fixed">
-        <li><a href="#">Головна</a></li>
-        <li>
-            <ul class="collapsible">
-                <li>
-                    <div class="collapsible-header">Завдання</div>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="#">Денні</a></li>
-                            <li><a href="#">Тижневі</a></li>
-                            <li><a href="#">Місячні</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-        <li><a href="#">Звички</a></li>
-        <li><a href="#">Статисеика</a></li>
-    </ul>
+<body> 
+    <nav class="nav-extended blue accent-2">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">GoalTrack</a>
+                <a href="#side-out" data-target="side-out" class="sidenav-trigger"><i class="material-icons">menu</i></a> 
+                <ul class="right">
+                        <li><span class="white-text" style="line-height:64px; padding: 0 12px;">{{ user.username }}</span></li>
+                        <li><a class="white-text" href="{% url 'register' %}">Реєстрація</a></li>
+                </ul>
+            </div>
+        </nav>
+ 
+        <ul id="side-out" class="sidenav sidenav-fixed">
+            <li><a href="#">Головна</a></li>
+            <li><a href="/">Завдання</a></li>
+            <li><a href="/habits">Звички</a></li>
+            <li><a href="#">Статистика</a></li>
+        </ul>
+ 
+        <main style="margin-left: 300px;">
+            {% block content %}
+            {% endblock %}
+        </main>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.collapsible');
-            M.Collapsible.init(elems);
+            M.Collapsible.init(document.querySelectorAll('.collapsible'));
+            M.Sidenav.init(document.querySelectorAll('.sidenav')); 
         });
     </script>
-
-    <main style="margin-left: 300px;">
-        {% block content %}
-        {% endblock %}
-    </main>
-    <footer class="page-footer">
-        <div class="container">
-
-        </div>
-    </footer>
+   
 </body>
 </html>
