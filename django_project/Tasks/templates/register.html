@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Register</title>
+</head>
+<body>
+    <div class="conteiner">
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                <div class="card grey-lighten-4">
+                    <div class="card-content">
+                        <span class="card-title center">
+                            Реєстрація
+                        </span>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="input-field">
+                                <input id="username" name="username" type="text" class="validate">
+                                <label for="username">Ім'я</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="password1" name="password1" type="password" class="validate">
+                                <label for="password1">Пароль</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="password2" name="password2" type="password" class="validate">
+                                <label for="password2">Повторіть пароль</label>
+                            </div>
+                            {% if form.errors %}
+                                <div class="card-panel red lighten-4">
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <button class="btn" type="submit">
+                                Зареєструватися
+                            </button>
+                        </form>
+                        <p style="margin-top:10px;"><a href="/login/">Вже маєте акаунт? Увійти</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
