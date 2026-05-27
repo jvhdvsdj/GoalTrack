@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+        <style>
+        .task-done {
+            opacity: 0.5;
+            filter: grayscale(60%);
+            transition: 0.3s;
+        }
+
+        .task-done .card-title {
+            text-decoration: line-through;
+        }
+        </style>
+        <div class="row">
+            {% for task in page_obj %}
+                <div class="col s12 m4">
+                    <div class="card blue-grey darken-1 {% if task.is_done %}task-done{% endif %}">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{ task.title }}</span>
+                            <p>{{ task.description }}</p>
+                        </div>
+                        <div class="card-action">
+                            <form method="POST" action="{% url 'complete_task' task.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit"class="btn-floating {% if task.is_done %}orange{% else %}green{% endif %}"><i class="material-icons">check</i></button>
+                            </form>
+                            <form method="POST" action="{% url 'delete_task' task.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-floating red"><i class="material-icons">delete</i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div id="made_task">
+            <a href="#modal1" class="btn modal-trigger">Додати завдання</a>
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4>Створення завдання</h4>
+                    <form method="POST" action="{% url 'add_task' %}" onsubmit="console.log('SUBMIT')">
+                        {% csrf_token %}
+ 
+                        <label>Назва завдання</label>
+                        <input type="text" name="title">
+                        <label>Коротки опис</label>
+                        <input type="text" name="description">
+                        <label>Дедлайн</label>
+                        <input type="datetime-local" name="deadline">
+ 
+                        <button type="submit" class="btn">Створити</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+ 
+        <footer id="task_footer" class="page-footer blue accent-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col s5">
+                        <h4>{{ task.title }}</h4>
+                    </div>
+                    <div class="col offset-s4 s3 ">
+                        <h5 id="time-left" data-time="{{ seconds_left }}"></h5>
+                    </div>
+                </div>
+            </div>
+ 
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                const modals = document.querySelectorAll('.modal');
+                M.Modal.init(modals);
+                const timerElement = document.getElementById("time-left");
+                function format(value) {
+                    return value.toString().padStart(2, '0');
+                }
+                if (timerElement && timerElement.dataset.time) {
+                    let timeLeft = parseInt(timerElement.dataset.time);
+                    function updateTimer() {
+                        if (timeLeft <= 0) {
+                            timerElement.innerText = "Час вийшов";
+                            return;
+                        }
+
+                        let days = Math.floor(timeLeft / 86400);
+                        let hours = Math.floor((timeLeft % 86400) / 3600);
+                        let minutes = Math.floor((timeLeft % 3600) / 60);
+                        let seconds = timeLeft % 60;
+
+                        timerElement.innerText =
+                            days + "д " +
+                            format(hours) + ":" +
+                            format(minutes) + ":" +
+                            format(seconds);
+
+                        timeLeft--;
+                    }
+                    updateTimer();
+                    setInterval(updateTimer, 1000);
+                }
+            });
+            </script>
+ 
+        </footer>
+{% endblock %}
